@@ -1,15 +1,21 @@
+require('dotenv').config(); // ⬅️ Esto primero
+
 const express = require('express');
 const cors = require('cors');
-const {mongoose} = require('./database');
-var app = express();
-//middlewares
+const { mongoose } = require('./database');
+const app = express();
+
+// Middlewares
 app.use(express.json());
-app.use(cors({origin: 'http://localhost:4200'}));
-//Cargamos el modulo de direccionamiento de rutas
-app.use('/api/personaje', require ('./routes/personaje.route.js'))
-//setting
+app.use(cors({ origin: 'http://localhost:4200' }));
+
+// Rutas
+app.use('/api/personaje', require('./routes/personaje.route.js'));
+
+// Puerto
 app.set('port', process.env.PORT || 3000);
-//starting the server
+
+// Iniciar servidor
 app.listen(app.get('port'), () => {
-console.log(`Server started on port`, app.get('port'));
+  console.log('✅ Servidor iniciado en el puerto', app.get('port'));
 });

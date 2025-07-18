@@ -1,7 +1,10 @@
-
 const mongoose = require('mongoose');
-const URI = 'mongodb://localhost/proyectodb';
+require('dotenv').config();
+
+const URI = process.env.MONGO_URI;
+
 mongoose.connect(URI)
-.then(db=>console.log('DB is connected'))
-.catch(err=>console.error(err))
-module.exports = mongoose;
+  .then(() => console.log('✅ Conectado a MongoDB Atlas'))
+  .catch(err => console.error('❌ Error al conectar a MongoDB:', err));
+
+module.exports = { mongoose };
