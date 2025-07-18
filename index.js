@@ -1,24 +1,20 @@
-require('dotenv').config(); // Cargar variables de entorno
+require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const { mongoose } = require('./database');
+require('./database'); // Asegurate que este conecta correctamente
 
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(express.json());
-
-// Configurar CORS para permitir cualquier origen (útil para Postman y Render)
 app.use(cors());
 
 // Rutas
 app.use('/api/personaje', require('./routes/personaje.route.js'));
 
-// Puerto
-app.set('port', process.env.PORT || 3000);
-
-// Iniciar servidor
-app.listen(app.get('port'), () => {
-  console.log('✅ Servidor iniciado en el puerto', app.get('port'));
+// Usar el puerto que Render asigna
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log('✅ Servidor iniciado en el puerto', PORT);
 });
