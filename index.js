@@ -5,7 +5,6 @@ require('./database');
 
 const app = express();
 app.use(express.json());
-app.use('/api/upload', require('./routes/upload.route'));
 app.use(cors());
 app.use('/api/personaje', require('./routes/personaje.route.js'));
 
